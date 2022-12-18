@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <style>
+      #game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #result {
+        margin: 20px 0;
+      }
+      #choices button {
+        display: inline-block;
+        margin: 0 10px;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: 2px solid #333;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game">
+      <div id="result">
+        <p id="output"></p>
+      </div>
+      <div id="choices">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+      </div>
+    </div>
+    <script>
+      const output = document.getElementById('output');
+      const rockButton = document.getElementById('rock');
+      const paperButton = document.getElementById('paper');
+      const scissorsButton = document.getElementById('scissors');
+      rockButton.addEventListener('click', () => playGame('rock'));
+      paperButton.addEventListener('click', () => playGame('paper'));
+      scissorsButton.addEventListener('click', () => playGame('scissors'));
+      function playGame(playerChoice) {
+        const computerChoice = getComputerChoice();
+        const result = getResult(playerChoice, computerChoice);
+        output.innerHTML = `You chose ${playerChoice}, the computer chose ${computerChoice}. ${result}`;
+      }
+      function getComputerChoice() {
+        const choices = ['rock', 'paper', 'scissors'];
+        const randomIndex = Math.floor(Math.random() * 3);
+        return choices[randomIndex];
+      }
+      function getResult(playerChoice, computerChoice) {
+        if (playerChoice === computerChoice) {
+          return 'It is a tie!';
+        } else if (
+          (playerChoice === 'rock' && computerChoice === 'scissors') ||
+          (playerChoice === 'paper' && computerChoice === 'rock') ||
+          (playerChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+          return 'You win!';
+        } else {
+          return 'The computer wins!';
+        }
+      }
+    </script>
+  </body>
+</html>
